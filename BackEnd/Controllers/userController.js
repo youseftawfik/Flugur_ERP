@@ -7,6 +7,8 @@ const getallusers = async (req, res) => {
    try {
 
     const user = await Users.find();
+    const userCount = await Users.countDocuments();
+    const activeUsersCount = await Users.countDocuments({is_active: "Active"});
 
     const formattedUsers = user.map((user) => ({
       ...user.toObject(),
@@ -18,7 +20,7 @@ const getallusers = async (req, res) => {
           ? user.image.replace(/\\/g, "/") : `Uploads/${user.image}` : null 
     }));
         
-    res.status(200).json({msg:"All Users Retrived", user: formattedUsers})
+    res.status(200).json({msg:"All Users Retrived", user: formattedUsers, userCount, activeUsersCount})
         
    } catch (error) {
       res.status(500).json({msg: "Server Error",error: error.message}) 

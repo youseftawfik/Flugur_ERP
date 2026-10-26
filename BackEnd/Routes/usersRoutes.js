@@ -11,10 +11,8 @@ const {getMyNotifications, markAsRead, deleteNotification, markAllAsRead} = requ
 
 const {uploadprofileImage} = require("../Middlewares/UploadImage");
 
-const {authRateLimiter} = require("../Middlewares/rateLimit.middleware");
-
-router.post("/register", authRateLimiter, authenticate, authorize("Admin"), uploadprofileImage, register);
-router.post("/login", authRateLimiter, login);
+router.post("/register", authenticate, authorize("Admin"), uploadprofileImage, register);
+router.post("/login", login);
 router.post("/logout", logout);
 router.get("/my-notifications", authenticate, getMyNotifications);
 router.patch("/notifications/read-all", authenticate, markAllAsRead);

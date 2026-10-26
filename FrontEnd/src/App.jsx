@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router'
 // import ProtectedRoute from "./components/context/ProtectedRoute";
+import AuthContext from './components/context/authContext';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Login from "../src/pages/Login/Login"
 import Layout from "../src/Layout/Layout";
@@ -16,10 +17,13 @@ import AP_Lines from "./pages/Accountant/AP_Invoices/AP_InvoiceLine"
 import APPayment from "./pages/Accountant/AP_Invoices/AccountsPayablePayment"
 import ARInvoices from "./pages/Accountant/AR_Invoices/AR_Invoices"
 import ARReceipts from "./pages/Accountant/AR_Invoices/AR_Receipts"
+import Asset from "./pages/Accountant/Fixed_Assets/FixedAsset"
+import Land from "./pages/Landing"
 import './App.css'
 
 const router = createBrowserRouter([
-  { path: '/', element: <Login/> },
+  { path: '/', element: <Land/> },
+  { path: '/login', element: <Login/> },
   { path: 'Dashboard',   element: <Layout/> ,
       children: [
         {index: true, element: <Dashboard/>},
@@ -35,6 +39,7 @@ const router = createBrowserRouter([
         {path: 'AP_Payment', element: <APPayment/>},
         {path: 'AR_Invoices', element: <ARInvoices/>},
         {path: 'AR_Receipts/:id', element: <ARReceipts/>},
+        {path: 'Asset', element: <Asset/>},
       ]
   },
 ])
@@ -44,7 +49,10 @@ const router = createBrowserRouter([
 function App() {
 
   return (
-    <RouterProvider router={router} />
+    <AuthContext>
+      <RouterProvider router={router} />
+    </AuthContext>
+    // <RouterProvider router={router} />
   )
 }
 

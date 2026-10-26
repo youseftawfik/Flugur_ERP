@@ -17,7 +17,7 @@ export default function NotificationBell() {
       >
         <i className="bi bi-bell fs-5"></i>
         {unreadCount > 0 && (
-          <span className="position-absolute top-0 translate-middle badge rounded-pill bg-danger">
+          <span className="position-absolute top-0 translate-middle badge rounded-pill bg-danger" style={{ marginTop: '10px' }}>
             {unreadCount}
           </span>
         )}
