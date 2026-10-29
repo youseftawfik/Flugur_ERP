@@ -23,7 +23,7 @@ import './App.css'
 
 const router = createBrowserRouter([
   { path: '/', element: <Land/> },
-  // { path: '/login', element: <Login/> },
+  { path: '/login', element: <Login/> },
   { path: 'Dashboard',   element: <Layout/> ,
       children: [
         {index: true, element: <Dashboard/>},

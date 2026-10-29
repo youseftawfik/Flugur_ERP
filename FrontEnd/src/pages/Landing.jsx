@@ -436,7 +436,7 @@ const FlugurLanding = () => {
             </ul>
 
             <div className={`d-flex align-items-center gap-2`}>
-              <a href="#" onClick={(e) => {e.preventDefault(); navigate('/Dashboard');}}className={`btn ${Style.btnghost} d-none d-md-inline-flex py-2 px-4`}>Sign In</a>
+              <a href="#" onClick={(e) => {e.preventDefault(); navigate('/login');}}className={`btn ${Style.btnghost} d-none d-md-inline-flex py-2 px-4`}>Sign In</a>
               <button className={`btn ${Style.btnprimaryglow} py-2 px-4`} data-bs-toggle="modal" data-bs-target="#signupModal">
                 Start Free <i className="bi bi-arrow-right ms-1" />
               </button>
