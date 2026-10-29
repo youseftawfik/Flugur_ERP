@@ -5,7 +5,7 @@ let socket;
 export function connectSocket(token) {
     if (socket) return socket;
 
-    socket = io("http://localhost:4000", {
+    socket = io(window.location.origin, {
         auth: {
             token: token
         }

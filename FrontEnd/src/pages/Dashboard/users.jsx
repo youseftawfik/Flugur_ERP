@@ -119,7 +119,7 @@ export default function UserManagementDark() {
                 <td className={Style.umtd}>
                   <div className={Style.umusercell}>
                     <div className={`${Style.umavatar} ${u.avatarClass}`}>
-                      <img src={`http://localhost:4000/${u.image} `} alt={u.name} className={Style.umavatar} />
+                      <img src={`/${u.image}`} alt={u.name} className={Style.umavatar} />
                     </div>
                     <div>
                       <div className={Style.umusernamecell}>{u.first_name} {u.last_name}</div>

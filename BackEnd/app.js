@@ -20,7 +20,14 @@ app.use(cors({
     origin: "http://localhost:5173"
 }));
 
-connect();
+app.use(async (req, res, next) => {
+    try {
+        await connect();
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
 
 app.use("/Uploads", express.static(path.join(__dirname, "Uploads")));
 
@@ -56,3 +63,7 @@ app.use('/api/ar_invoices', ar_invoicesRoutes);
 app.use('/api/ar_receipts', ar_receiptsRoutes);
 
 module.exports = app;
+app.use((error, req, res, next) => {
+    console.error("Request failed:", error);
+    res.status(500).json({ msg: "Server error" });
+});

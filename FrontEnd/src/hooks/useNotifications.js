@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { connectSocket } from "../socket";
-import axios from "axios";
+import api from "../components/api";
 
 export function useNotification(token) {
   const [notifications, setNotifications] = useState([]);
@@ -8,10 +8,8 @@ export function useNotification(token) {
   useEffect(() => {
     if (!token) return;
 
-    axios
-      .get("http://localhost:4000/api/dashboard/my-notifications", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+    api
+      .get("dashboard/my-notifications")
       .then((res) => {
         setNotifications(res.data);
       })
@@ -38,11 +36,7 @@ export function useNotification(token) {
 
   const markAsRead = async (id) => {
     try {
-      await axios.patch(
-        `http://localhost:4000/api/dashboard/notifications/${id}/read`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } },
-      );
+      await api.patch(`dashboard/notifications/${id}/read`);
 
       setNotifications((prev) =>
         prev.map((n) => (n._id === id ? { ...n, readAt: new Date() } : n)),
@@ -54,13 +48,7 @@ export function useNotification(token) {
 
   const deleteNotification = async (id) => {
     try {
-      await axios.delete(
-        `http://localhost:4000/api/dashboard/notifications/${id}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
-
+      await api.delete(`dashboard/notifications/${id}`);
       setNotifications((prev) => prev.filter((n) => n._id !== id));
     } catch (error) {
       console.log(error);
@@ -69,11 +57,7 @@ export function useNotification(token) {
 
   const markAllAsRead = async () => {
     try {
-      await axios.patch(
-        "http://localhost:4000/api/dashboard/notifications/read-all",
-        {},
-        { headers: { Authorization: `Bearer ${token}` } },
-      );
+      await api.patch("dashboard/notifications/read-all");
 
       setNotifications((prev) =>
         prev.map((n) => (n.readAt ? n : { ...n, readAt: new Date() })),
@@ -83,5 +67,5 @@ export function useNotification(token) {
     }
   };
 
-  return { notifications, unreadCount, markAsRead, deleteNotification, markAllAsRead};
+  return { notifications, unreadCount, markAsRead, deleteNotification, markAllAsRead };
 }

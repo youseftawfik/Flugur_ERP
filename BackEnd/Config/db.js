@@ -1,25 +1,30 @@
 const mongoose = require("mongoose");
 
-const connectedDB = async (retries = 5, delay = 3000) => {
-  while (retries) {
-    try {
-      await mongoose.connect(process.env.MONGO_URL);
-      console.log("DB is Connected Successfully");
-      console.log(mongoose.connection.db.databaseName);
+let connectionPromise;
 
-      return;
-    } catch (error) {
-      retries -= 1;
-      console.log(`DB is failed to connect, retries left: ${retries}`);
-
-      if (!retries) {
-        console.error("Can't connect to the DB after multiple attempts");
-        process.exit(1);
-      }
-
-      await Promise((res) => res.setTimeout(res, delay));
-    }
+const connectedDB = async () => {
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection;
   }
+
+  if (!process.env.MONGO_URL) {
+    throw new Error("MONGO_URL environment variable is required");
+  }
+
+  if (!connectionPromise) {
+    connectionPromise = mongoose
+      .connect(process.env.MONGO_URL)
+      .then(() => {
+        console.log("DB is Connected Successfully");
+        return mongoose.connection;
+      })
+      .catch((error) => {
+        connectionPromise = null;
+        throw error;
+      });
+  }
+
+  return connectionPromise;
 };
 
 module.exports = connectedDB;
