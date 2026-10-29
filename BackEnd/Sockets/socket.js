@@ -34,6 +34,7 @@ function getIO(){
 }
 
 function sendNotificationToUser(userId, notification) {
+    if (!io) return;
     const sockets = getUserSockets(userId);
 
     sockets.forEach((socketId) => {
