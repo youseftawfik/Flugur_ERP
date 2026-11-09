@@ -7,10 +7,10 @@ const authorize = require("../Middlewares/authorize");
 
 const {addGlAccount, getallaccounts, updateAccount, deleteaccount, updatestatus} = require("../Controllers/glController")
 
-router.post("/add", authenticate, authorize("Accountant"), addGlAccount);
-router.get("/accounts", authenticate, authorize("Accountant"), getallaccounts);
-router.put("/:id", authenticate, authorize("Accountant"), updateAccount)
-router.delete("/:id", authenticate, authorize("Accountant"), deleteaccount);
-router.patch("/status/:id", authenticate, authorize("Accountant"), updatestatus);
+router.post("/add",  addGlAccount);
+router.get("/accounts",  getallaccounts);
+router.put("/:id",  updateAccount)
+router.delete("/:id",  deleteaccount);
+router.patch("/status/:id",  updatestatus);
 
 module.exports = router;

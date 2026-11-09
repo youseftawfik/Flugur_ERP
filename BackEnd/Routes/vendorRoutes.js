@@ -7,10 +7,10 @@ const authorize = require("../Middlewares/authorize");
 
 const { addvendor, getallvendor, getvendorById, updateVendor, updatestatus } = require("../Controllers/vendorsController")
 
-router.post("/add", authenticate, authorize("Accountant"), addvendor);
-router.get("/", authenticate, authorize("Accountant"), getallvendor);
-router.get("/:id", authenticate, authorize("Accountant"), getvendorById);
-router.put("/:id", authenticate, authorize("Accountant"), updateVendor)
-router.patch("/status/:id", authenticate, authorize("Accountant"), updatestatus);
+router.post("/add",  addvendor);
+router.get("/",  getallvendor);
+router.get("/:id",  getvendorById);
+router.put("/:id",  updateVendor)
+router.patch("/status/:id", updatestatus);
 
 module.exports = router;

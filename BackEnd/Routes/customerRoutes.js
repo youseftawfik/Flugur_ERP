@@ -7,10 +7,10 @@ const authorize = require("../Middlewares/authorize");
 
 const { addcustomer, getallCustomer, getCustomerById, updateCustomer, updatestatus } = require("../Controllers/customerController")
 
-router.post("/add", authenticate, authorize("Accountant"), addcustomer);
-router.get("/", authenticate, authorize("Accountant"), getallCustomer);
-router.get("/:id", authenticate, authorize("Accountant"), getCustomerById);
-router.put("/:id", authenticate, authorize("Accountant"), updateCustomer)
-router.patch("/status/:id", authenticate, authorize("Accountant"), updatestatus);
+router.post("/add",  addcustomer);
+router.get("/",  getallCustomer);
+router.get("/:id",  getCustomerById);
+router.put("/:id",  updateCustomer)
+router.patch("/status/:id", updatestatus);
 
 module.exports = router;
