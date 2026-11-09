@@ -81,23 +81,23 @@ export default function Login() {
                   <rect x="2" y="4" width="20" height="16" rx="2" />
                   <path d="m2 6 10 7 10-7" />
                 </svg>
-                <input id="email" type="email" className="fl-input" className={Style.input} placeholder="name@company.com" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                <input id="email" type="email"  className={Style.input} placeholder="name@company.com" value={email} onChange={(e) => setEmail(e.target.value)} required/>
               </div>
             </div>
 
             <div className={Style.field}>
               <div className={`d-flex justify-content-between ${Style.label}`}>
                 <label htmlFor="password" style={{ margin: 0 }}>Password</label>
-                <a href="#" className="fl-link" className={Style.forgotLink}>Forgot?</a>
+                <a href="#"  className={Style.forgotLink}>Forgot?</a>
               </div>
               <div className={Style.inputShell}>
                 <svg className={Style.leftIcon} width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="4" y="10" width="16" height="10" rx="2" />
                   <path d="M8 10V7a4 4 0 0 1 8 0v3" />
                 </svg>
-                <input id="password" type={showPw ? 'text' : 'password'} className="fl-input" className= {`${Style.input}`} style={{ paddingRight: "2.6rem" }}
+                <input id="password" type={showPw ? 'text' : 'password'}  className= {`fl-input ${Style.input}`} style={{ paddingRight: "2.6rem" }}
                        placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} required/>
-                <button type="button" className="fl-toggle" className={Style.pwToggle} onClick={() => setShowPw(!showPw)} aria-label="Show password">
+                <button type="button" className={Style.pwToggle} onClick={() => setShowPw(!showPw)} aria-label="Show password">
                   {showPw ? (
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.6 21.6 0 0 1 5.06-6.06M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a21.6 21.6 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24" />
@@ -114,11 +114,11 @@ export default function Login() {
             </div>
 
             <div className={Style.checkRow}>
-              <input id="keepSignedIn" type="checkbox" className="fl-check" className={Style.checkbox} checked={keepSignedIn} onChange={(e) => setKeepSignedIn(e.target.checked)}/>
+              <input id="keepSignedIn" type="checkbox"  className={Style.checkbox} checked={keepSignedIn} onChange={(e) => setKeepSignedIn(e.target.checked)}/>
               <label htmlFor="keepSignedIn" className={Style.checkLabel}>Keep me signed in</label>
             </div>
 
-            <button type="submit" className="fl-btn" className={Style.btn}>
+            <button type="submit"  className={Style.btn}>
               Sign in
               <svg className="fl-arrow" style={{ transition: "transform .15s ease" }} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M13 6l6 6-6 6" />
@@ -128,7 +128,7 @@ export default function Login() {
 
           <div className={Style.divider}>need assistance</div>
 
-          <div className="fl-help" className={Style.helpRow}>
+          <div  className={Style.helpRow}>
             Trouble signing in? <b>Contact administrator</b>
           </div>
 

@@ -19,7 +19,8 @@ router.patch("/notifications/read-all", authenticate, markAllAsRead);
 router.patch("/notifications/:id/read", authenticate, markAsRead);
 router.delete("/notifications/:id", authenticate, deleteNotification);
 
-router.get("/users", authenticate, authorize("Admin"), getallusers);
+// router.get("/users", authenticate, authorize("Admin"), getallusers);
+router.get("/users", getallusers);
 router.put("/:id", authenticate, authorize("Admin"), updateUser)
 router.patch("/:id/role", authenticate, authorize("Admin"), updaterole);
 router.delete("/:id", authenticate, authorize("Admin"), deleteUser);

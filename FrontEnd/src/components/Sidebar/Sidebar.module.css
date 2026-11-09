@@ -1,84 +1,146 @@
 .umsidebar {
-    width: 16rem;
-    flex-shrink: 0;
-    border-right: 1px solid rgba(76, 141, 255, 0.1);
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    display: flex;
-    flex-direction: column;
+  width: 16rem;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(76, 141, 255, 0.1);
+  background: rgba(10, 15, 30, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
 .umbrand {
-    padding: 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    border-bottom: 1px solid rgba(76, 141, 255, 0.1);
+  padding: 0.99rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(76, 141, 255, 0.1);
+  flex-shrink: 0;
 }
 
 .umbrandmark {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #7FB3FF, #4338CA);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 20px -6px rgba(76, 141, 255, 0.4);
-    flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px -6px rgba(76, 141, 255, 0.4);
+  flex-shrink: 0;
+}
+
+.umbrandmark img {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
 .umbrandname {
-    font-family: 'Sora', sans-serif;
-    font-weight: 600;
-    color: #F8FAFC;
-    line-height: 1.2;
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  color: #F8FAFC;
+  line-height: 1.2;
+  font-size: 0.95rem;
 }
 
 .umbrandtag {
-    font-size: 0.625rem;
-    letter-spacing: 0.15em;
-    color: rgba(127, 179, 255, 0.7);
-    font-weight: 500;
-    line-height: 1.2;
+  font-size: 0.625rem;
+  letter-spacing: 0.15em;
+  color: rgba(127, 179, 255, 0.7);
+  font-weight: 500;
+  line-height: 1.2;
 }
 
 .umnav {
-    flex: 1;
-    padding: 1rem 0.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  flex: 1;
+  padding: 0.75rem 0.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  overflow-y: auto;
+}
+
+.umsection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-bottom: 0.35rem;
+}
+
+.umsectionTitle {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748B;
+  padding: 0.85rem 0.85rem 0.4rem;
+  user-select: none;
 }
 
 .umnavitem {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.6rem 0.75rem;
-    border-radius: 12px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    border: 1px solid transparent;
-    background: none;
-    color: #94A3B8;
-    cursor: pointer;
-    transition: background .15s ease, color .15s ease;
-    text-align: left;
-    text-decoration: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  background: none;
+  color: #94A3B8;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  text-align: left;
+  text-decoration: none;
 }
 
 .umnavitem:hover {
-    background: rgba(30, 41, 59, 0.6);
-    color: #E2E8F0;
+  background: rgba(30, 41, 59, 0.7);
+  color: #E2E8F0;
 }
 
-.umnavitem .umactive {
-    background: rgba(76, 141, 255, 0.15);
-    color: #93C5FD;
-    border-color: rgba(96, 165, 250, 0.2);
+/* Active state — matches the teal/cyan pill in the screenshot */
+.umnavitem.umactive {
+  background: linear-gradient(90deg, rgba(8, 145, 178, 0.35), rgba(14, 165, 233, 0.25));
+  color: #67E8F9;
+  border-color: rgba(34, 211, 238, 0.25);
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.12);
+}
+
+.umnavitem.umactive svg {
+  color: #22D3EE;
+}
+
+.umnavitem span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Custom scrollbar */
+.umsidebar::-webkit-scrollbar,
+.umnav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.umsidebar::-webkit-scrollbar-track,
+.umnav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.umsidebar::-webkit-scrollbar-thumb,
+.umnav::-webkit-scrollbar-thumb {
+  background: rgba(76, 141, 255, 0.25);
+  border-radius: 4px;
+}
+
+.umsidebar::-webkit-scrollbar-thumb:hover,
+.umnav::-webkit-scrollbar-thumb:hover {
+  background: rgba(76, 141, 255, 0.4);
 }
 
 .umsidebarfooter {
@@ -117,58 +179,16 @@
 }
 
 .umlogout {
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+
     color: #64748B;
     cursor: pointer;
 }
 
 .umlogout:hover {
     color: #CBD5E1;
-}
-
-.umnav {
-    display: flex;
-    flex-direction: column;
-}
-
-.umnavitem,
-.umdropdownHeader {
-    display: flex;
-    align-items: center;
-    border-radius: 12px;
-    gap: 12px;
-    padding: 12px 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-    color: #94A3B8;
-}
-
-.umdropdownHeader:hover {
-    background: rgba(30, 41, 59, 0.6);
-    color: #E2E8F0;
-}
-
-.umdropdownTitle {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-}
-
-.umdropdownContent {
-    padding-left: 40px;
-    display: flex;
-    flex-direction: column;
-}
-
-.umdropdownItem {
-    padding: 10px 16px;
-    color: inherit;
-    border-radius: 12px;
-    text-decoration: none;
-    transition: all 0.2s;
-}
-
-.umdropdownItem:hover {
-    background: rgba(30, 41, 59, 0.6);
-    color: #E2E8F0;
 }

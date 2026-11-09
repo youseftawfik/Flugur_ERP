@@ -1,135 +1,122 @@
 import Style from './Sidebar.module.css'
 import Logo from "../../../public/Flugur_Logo_v2.png"
-
 import { UseAuth } from '../context/authContext';
-import { NavLink } from 'react-router'
+// import { NavLink } from 'react-router'
 import { useState } from 'react';
-import { LayoutGrid, BookOpen, FileText, Users, Settings, LogOut, ChevronDown, ChevronRight, Wallet, Wrench } from "lucide-react";
+// import { LayoutGrid, BookOpen, FileText, Users, Settings, LogOut, ChevronDown, ChevronRight, Wallet, Wrench } from "lucide-react";
 
-const NAV_ITEMS = [
+//   { label: "Fixed Assets", icon: Wrench, path: "/Dashboard/Asset", roles: ["Accountant"]
+//   },
+//   { label: "Reports", icon: FileText, path: "/Dashboard/reports", roles: ["Accounting Manager"]
+//   },
+//   { label: "User Management", icon: Users, path: "/Dashboard/users", roles: ["Admin"]
+//   },
+//   { label: "Settings", icon: Settings, path: "/Dashboard/settings", roles: ["Admin"]
+//   }
+// ];
+
+
+import { NavLink, useNavigate } from 'react-router'
+import { Home, Users, Database, CalendarCheck2, Calendar, FolderOpen, CardSim, Landmark, BriefcaseBusiness, GraduationCap, LogOut, ChartSpline, FlaskConical, Video,
+  BookOpen, FileText, Wallet
+ } from "lucide-react";
+
+const NAV_SECTIONS = [
   {
-    label: "Dashboard", icon: LayoutGrid, path: "/Dashboard", roles: ["Admin", "Accountant"]
+    items: [
+      { label: "Overview", icon: Home, path: "/Dashboard" },
+    ],
   },
-  { label: "Accounting",  icon: BookOpen, roles: ["Accountant"],
-    children: [
-      { key: "Ledger", label: "Ledger Accounts", path: "/Dashboard/Ledger", roles: ["Accountant"] },
-      { key: "Journals", label: "Journal Headers", path: "/Dashboard/Journal", roles: ["Accountant"] },
-    ]
+  {
+    title: "Accounting",
+    items: [
+      { label: "Ledger Accounts", icon: BookOpen, path: "/Dashboard/Ledger" },
+      { label: "Journal Headers", icon: BookOpen, path: "/Dashboard/Journal" },
+    ],
   },
-  { label: "Invoices", icon: FileText, roles: ["Accountant"],
-    children: [
-      { key: "AP Invoices", label: "Accounts Payable", path: "/Dashboard/AP_Invoices", roles: ["Accountant"] },
-      { key: "AR Invoices", label: "Accounts Receivable", path: "/Dashboard/AR_Invoices", roles: ["Accountant"] },
-    ]
+  {
+    title: "Invoices",
+    items: [
+      { label: "Accounts Payable", icon: FileText, path: "/Dashboard/AP_Invoices" },
+      { label: "Accounts Receivable", icon: FileText, path: "/Dashboard/AR_Invoices" },
+    ],
   },
-  { label: "Clients", icon: Users, roles: ["Accountant"],
-    children: [
-      { key: "Vendors", label: "Vendors", path: "/Dashboard/Vendors", roles: ["Accountant"] },
-      { key: "Customers", label: "Customers", path: "/Dashboard/Customers", roles: ["Accountant"] },
-    ]
+  {
+    title: "Clients",
+    items: [
+      { label: "Vendors", icon: Users, path: "/Dashboard/Vendors" },
+      { label: "Customers", icon: Users, path: "/Dashboard/Customers" },
+    ],
   },
-  { label: "Payments", icon: Wallet,roles: ["admin", "accountant"],
-    children: [
-      { key: "AP", label: "AP Payments", path: "/Dashboard/AP_Payment", roles: ["Accountant"] },
-    ]
+  {
+    title: "Payments",
+    items: [
+      { label: "AP Payments", icon: Wallet, path: "/Dashboard/AP_Payment" },
+    ],
   },
-  { label: "Fixed Assets", icon: Wrench, path: "/Dashboard/Asset", roles: ["Accountant"]
+  {
+    title: "Admin",
+    items: [
+      { label: "User Management", icon: Users, path: "/Dashboard/users"},
+    ],
   },
-  { label: "Reports", icon: FileText, path: "/Dashboard/reports", roles: ["Accounting Manager"]
-  },
-  { label: "User Management", icon: Users, path: "/Dashboard/users", roles: ["Admin"]
-  },
-  { label: "Settings", icon: Settings, path: "/Dashboard/settings", roles: ["Admin"]
-  }
 ];
 
 export default function Sidebar() {
-  const [openMenus, setOpenMenus] = useState({});
-  const { user } = UseAuth();
+  // const { user, Logout } = UseAuth();
+  // const navigate = useNavigate();
 
-  const toggleMenu = (label) => { setOpenMenus(prev => ({ ...prev, [label]: !prev[label] })); };
-
-
-  const filteredNavItems = NAV_ITEMS
-    .filter(item => !item.roles || item.roles.includes(user?.role))
-    .map(item => {
-      if (item.children) {
-        return {
-          ...item,
-          children: item.children.filter(
-            child => !child.roles || child.roles.includes(user?.role)
-          )
-        };
-      }
-      return item;
-    })
-    .filter(item => !item.children || item.children.length > 0);
+  // const handleLogout = () => {
+  //   Logout();
+  //   navigate("/", { replace: true });
+  // };
 
   return (
     <aside className={Style.umsidebar}>
       <div className={Style.umbrand}>
         <div className={Style.umbrandmark}>
-          <img src={Logo} />
+          <img src={Logo} alt="Flugur" />
         </div>
         <div>
           <div className={Style.umbrandname}>Flugur ERP</div>
-          <div className={Style.umbrandtag}>PRECISION LEDGER</div>
+          <div className={Style.umbrandtag}>Intelligence Dashboard</div>
         </div>
       </div>
 
       <nav className={Style.umnav}>
-        {filteredNavItems.map((item) => {
-          const isOpen = openMenus[item.label] || false;
-
-          if (item.children && item.children.length > 0) {
-            return (
-              <div key={item.label} className={Style.umdropdown}>
-                <div className={Style.umdropdownHeader} onClick={() => toggleMenu(item.label)}>
-                  <div className={Style.umdropdownTitle}>
-                    <item.icon size={17} />
-                    <span>{item.label}</span>
-                  </div>
-                  {isOpen ? (<ChevronDown size={16} />) : (<ChevronRight size={16} />)}
-                </div>
-
-                {isOpen && (<div className={Style.umdropdownContent}>
-                  {item.children.map((child) => (
-                    <NavLink
-                      key={child.key || child.label}
-                      to={child.path}
-                      className={({ isActive }) => `${Style.umdropdownItem} ${isActive ? Style.umactive : ""}`}>
-                      <span>{child.label}</span>
-                    </NavLink>
-                  ))}
-                </div>
-                )}
-              </div>
-            );
-          }
-
-          return (
-            <NavLink
-              key={item.label}
-              to={item.path}
-              end={item.path === "/"}
-              className={({ isActive }) => `${Style.umnavitem} ${isActive ? Style.umactive : ""}`}>
-              <item.icon size={17} />
-              <span>{item.label}</span>
-            </NavLink>
-          );
-        })}
+        {NAV_SECTIONS.map((section, sIdx) => (
+          <div key={section.title || `section-${sIdx}`} className={Style.umsection}>
+            {section.title && (
+              <div className={Style.umsectionTitle}>{section.title}</div>
+            )}
+            {section.items.map((item) => (
+              <NavLink
+                key={item.label}
+                to={item.path}
+                end={item.path === "/" || item.path === "/Dashboard"}
+                className={({ isActive }) =>
+                  `${Style.umnavitem} ${isActive ? Style.umactive : ""}`
+                }
+              >
+                <item.icon size={18} strokeWidth={1.75} />
+                <span>{item.label}</span>
+              </NavLink>
+            ))}
+          </div>
+        ))}
       </nav>
-
-      <div className={Style.umsidebarfooter}>
+      {/* <div className={Style.umsidebarfooter}>
         <div className={Style.umusermini}>
           <div className={Style.umuseravatar} />
           <div>
-            <div className={Style.umusername}>David Miller</div>
-            <div className={Style.umuserrole}>Super Admin</div>
+            <div className={Style.umusername}>{user?.name || user?.email || "User"}</div>
+            <div className={Style.umuserrole}>{user?.role || "User"}</div>
           </div>
         </div>
-        <LogOut size={16} className={Style.umlogout} />
-      </div>
+        <button type="button" className={Style.umlogout} onClick={handleLogout} aria-label="Log out" title="Log out">
+          <LogOut size={16} />
+        </button>
+      </div> */}
     </aside>
-  )
+  );
 }
